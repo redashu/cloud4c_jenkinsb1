@@ -16,3 +16,7 @@
 
 <img src="tools.png">
 
+## Installation of jenkins on given targets
+
+<img src="install.png">
+
