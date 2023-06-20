@@ -149,4 +149,21 @@ jenkins:x:995:993:Jenkins Automation Server:/var/lib/jenkins:/bin/false
 
 ```
 
+## Overall Jenkins user and backend interface understanding 
+
+<img src="udd.png">
+
+### Understanding job concept of jenkins 
+
+<img src="job.png">
+
+### job management options 
+
+<img src="job2.png">
+
+### created and run job1
+
+<img src="jobrun.png">
+
+
 
