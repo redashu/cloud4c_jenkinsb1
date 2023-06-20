@@ -117,4 +117,25 @@ Created symlink from /etc/systemd/system/multi-user.target.wants/jenkins.service
 [root@ip-172-31-41-190 ~]# sudo systemctl start jenkins
 ```
 
+## Verify installation 
+
+```
+[root@ip-172-31-41-190 ~]# rpm -qa jenkins* 
+jenkins-2.401.1-1.1.noarch
+[root@ip-172-31-41-190 ~]# 
+[root@ip-172-31-41-190 ~]# rpm -qc  jenkins
+/etc/init.d/jenkins
+/etc/logrotate.d/jenkins
+/etc/sysconfig/jenkins
+[root@ip-172-31-41-190 ~]# grep jenkins  /etc/passwd
+jenkins:x:995:993:Jenkins Automation Server:/var/lib/jenkins:/bin/false
+[root@ip-172-31-41-190 ~]# 
+
+
+```
+## Understanding user story in jenkins
+
+<img src="users.png">
+
+
 
