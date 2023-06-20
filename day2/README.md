@@ -41,3 +41,80 @@ ec2-user
 root
 
 ```
+
+## Steps to Install jenkins in Redhat / centos / amazon linux 
+
+### Link details 
+
+[click_here](https://www.jenkins.io/doc/tutorials/tutorial-for-installing-jenkins-on-AWS/)
+
+
+### step 1 -- update & upgrade software
+
+```
+root@ip-172-31-41-190 ~]# yum update
+Failed to set locale, defaulting to C
+Loaded plugins: extras_suggestions, langpacks, priorities, update-motd
+amzn2-core                                                                                                            | 3.7 kB  00:00:00     
+No packages marked for update
+[root@ip-172-31-41-190 ~]# yum upgrade
+Failed to set locale, defaulting to C
+Loaded plugins: extras_suggestions, langpacks, priorities, update-motd
+No packages marked for update
+[root@ip-172-31-41-190 ~]# 
+
+
+
+```
+
+### Step 2 : creating repo for jenkins software
+
+```
+sudo wget -O /etc/yum.repos.d/jenkins.repo \
+>     https://pkg.jenkins.io/redhat-stable/jenkins.repo
+```
+
+### step 3 installing key 
+
+```
+ sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+```
+
+### step 4 
+
+```
+sudo amazon-linux-extras install java-openjdk11 -y
+```
+
+### step 5 
+
+```
+[root@ip-172-31-41-190 ~]# sudo yum install jenkins -y
+Failed to set locale, defaulting to C
+Loaded plugins: extras_suggestions, langpacks, priorities, update-motd
+Resolving Dependencies
+--> Running transaction check
+---> Package jenkins.noarch 0:2.401.1-1.1 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+=============================================================================================================================================
+ Package                         Arch                           Version                                Repository                       Size
+=============================================================================================================================================
+Installing:
+ jenkins                         noarch                         2.401.1-1.1                            jenkins                          94 M
+
+
+```
+
+### start service
+
+```
+[root@ip-172-31-41-190 ~]# sudo systemctl enable jenkins
+Created symlink from /etc/systemd/system/multi-user.target.wants/jenkins.service to /usr/lib/systemd/system/jenkins.service.
+[root@ip-172-31-41-190 ~]# 
+[root@ip-172-31-41-190 ~]# sudo systemctl start jenkins
+```
+
+
