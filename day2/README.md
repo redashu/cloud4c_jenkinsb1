@@ -137,5 +137,16 @@ jenkins:x:995:993:Jenkins Automation Server:/var/lib/jenkins:/bin/false
 
 <img src="users.png">
 
+### login to your jenkins ui -- using your public IP and password 
+
+### password you can list 
+
+```
+[root@ip-172-31-41-190 ~]# sudo cat  /var/lib/jenkins/secrets/initialAdminPassword 
+5c5b7923c4c841be9702503a36fdca8b
+[root@ip-172-31-41-190 ~]# 
+
+
+```
 
 
