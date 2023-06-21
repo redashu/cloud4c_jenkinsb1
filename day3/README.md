@@ -164,5 +164,10 @@ Resolving Dependencies
 --> Processing Dependency: perl(Term::ReadKey) for package: git-2.40.1-1.amzn2
 ```
 
+## Understanding auto-update and trigger 
+
+<img src="trigger.png">
+
+
 
 
