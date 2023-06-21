@@ -62,3 +62,80 @@ Created symlink from /etc/systemd/system/multi-user.target.wants/docker.service 
  Main PID: 18201 (dockerd)
 
 ```
+
+## Understanding integration 
+
+### Docker arch of server and client 
+
+<img src="dockerarch.png">
+
+### docker on local system only allow root user to access docker server
+
+```
+[ec2-user@ip-172-31-41-190 ~]$ whoami
+ec2-user
+[ec2-user@ip-172-31-41-190 ~]$ docker version 
+Client:
+ Version:           20.10.23
+ API version:       1.41
+ Go version:        go1.18.9
+ Git commit:        7155243
+ Built:             Tue Apr 11 22:56:36 2023
+ OS/Arch:           linux/amd64
+ Context:           default
+ Experimental:      true
+Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get "http://%2Fvar%2Frun%2Fdocker.sock/v1.24/version": dial unix /var/run/docker.sock: connect: permission denied
+[ec2-user@ip-172-31-41-190 ~]$ 
+[ec2-user@ip-172-31-41-190 ~]$ 
+[ec2-user@ip-172-31-41-190 ~]$ sudo -i
+[root@ip-172-31-41-190 ~]# whoami
+root
+[root@ip-172-31-41-190 ~]# docker version 
+Client:
+ Version:           20.10.23
+ API version:       1.41
+ Go version:        go1.18.9
+ Git commit:        7155243
+ Built:             Tue Apr 11 22:56:36 2023
+ OS/Arch:           linux/amd64
+ Context:           default
+ Experimental:      true
+
+Server:
+ Engine:
+  Version:          20.10.23
+  API version:      1.41 (minimum version 1.12)
+  Go version:       go1.18.9
+  Git commit:       6051f14
+  Built:            Tue Apr 11 22:57:17 2023
+  OS/Arch:          linux/amd64
+  Experimental:     false
+ containerd:
+  Version:          1.6.19
+
+```
+
+### jenkins with docker 
+
+<img src="jd.png">
+
+### understanding group and unix socket 
+
+<img src="gg.png">
+
+### adduser to docker group 
+
+```
+[root@ip-172-31-41-190 ~]# grep  docker  /etc/group
+docker:x:991:
+[root@ip-172-31-41-190 ~]# 
+[root@ip-172-31-41-190 ~]# 
+[root@ip-172-31-41-190 ~]# usermod -G docker  ec2-user
+[root@ip-172-31-41-190 ~]# usermod -G docker  jenkins
+[root@ip-172-31-41-190 ~]# 
+[root@ip-172-31-41-190 ~]# grep  docker  /etc/group
+docker:x:991:ec2-user,jenkins
+[root@ip-172-31-41-190 ~]# 
+
+
+```
