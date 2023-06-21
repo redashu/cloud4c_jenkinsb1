@@ -148,4 +148,21 @@ docker:x:991:ec2-user,jenkins
 [ec2-user@ip-172-31-41-190 ~]$ sudo chmod  777  /var/run/docker.sock 
 ```
 
+### installing git on the machine so that jenkins can use that
+
+```
+[ec2-user@ip-172-31-41-190 ~]$ sudo yum install git -y
+Failed to set locale, defaulting to C
+Loaded plugins: extras_suggestions, langpacks, priorities, update-motd
+amzn2-core                                                                                                            | 3.7 kB  00:00:00     
+Resolving Dependencies
+--> Running transaction check
+---> Package git.x86_64 0:2.40.1-1.amzn2.0.1 will be installed
+--> Processing Dependency: perl-Git = 2.40.1-1.amzn2.0.1 for package: git-2.40.1-1.amzn2.0.1.x86_64
+--> Processing Dependency: git-core-doc = 2.40.1-1.amzn2.0.1 for package: git-2.40.1-1.amzn2.0.1.x86_64
+--> Processing Dependency: git-core = 2.40.1-1.amzn2.0.1 for package: git-2.40.1-1.amzn2.0.1.x86_64
+--> Processing Dependency: perl(Term::ReadKey) for package: git-2.40.1-1.amzn2
+```
+
+
 
