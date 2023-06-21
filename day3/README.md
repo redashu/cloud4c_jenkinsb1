@@ -139,3 +139,13 @@ docker:x:991:ec2-user,jenkins
 
 
 ```
+
+### adding user into group need docker restart but in prod env we can't restart docker any time
+
+### work around is
+
+```
+[ec2-user@ip-172-31-41-190 ~]$ sudo chmod  777  /var/run/docker.sock 
+```
+
+
