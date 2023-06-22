@@ -41,3 +41,19 @@ chmod +x /usr/bin/docker-compose
 Docker Compose version v2.19.0
 
 ```
+
+## Plugins in jenkins 
+
+<img src="plugin.png">
+
+### Understanding CI 
+
+<img src="cip.png">
+
+### pipeline jobs manual configuration is done 
+
+<img src="done.png">
+
+
+
+
