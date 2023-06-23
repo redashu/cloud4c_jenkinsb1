@@ -80,4 +80,137 @@ Flags:               fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cm
 
 ```
 
+### Jenkins master slave architecture 
 
+<img src="master.png">
+
+## steps to install jenkins slave 
+
+### install jdk 8 or later on slave machine 
+
+```
+  12  sudo amazon-linux-extras install java-openjdk11 -y
+   13  history 
+[root@ip-172-31-12-245 ~]# java -version 
+openjdk version "11.0.19" 2023-04-18 LTS
+OpenJDK Runtime Environment (Red_Hat-11.0.
+```
+
+### on slave create user and test it can run java 
+
+```
+[root@ip-172-31-12-245 ~]# useradd  ashu
+[root@ip-172-31-12-245 ~]# passwd ashu
+Changing password for user ashu.
+New password: 
+BAD PASSWORD: The password is shorter than 7 characters
+Retype new password: 
+passwd: all authentication tokens updated successfully.
+[root@ip-172-31-12-245 ~]# 
+[root@ip-172-31-12-245 ~]# su - ashu 
+[ashu@ip-172-31-12-245 ~]$ 
+[ashu@ip-172-31-12-245 ~]$ java -version 
+openjdk version "11.0.19" 2023-04-18 LTS
+OpenJDK Runtime Environment (Red_Hat-11.0.19.0.7-1.amzn2.0.1) (build 11.0.19+7-LTS)
+OpenJDK 64-Bit Server VM (Red_Hat-11.0.19.0.7-1.amzn2.0.1) (build 11.0.19+7-LTS, mixed mode, sharing)
+[ashu@ip-172-31-12-245 ~]$ 
+
+
+```
+
+### step on master machine 
+
+### checking backend jenkins user 
+
+```
+[root@ip-172-31-41-190 jenkins]# 
+[root@ip-172-31-41-190 jenkins]# grep jenkins  /etc/passwd
+jenkins:x:995:993:Jenkins Automation Server:/var/lib/jenkins:/bin/false
+[root@ip-172-31-41-190 jenkins]# 
+[root@ip-172-31-41-190 jenkins]# su - jenkins 
+Last login: Fri Jun 23 07:58:59 IST 2023 on pts/0
+[root@ip-172-31-41-190 jenkins]# 
+
+```
+
+### assign shell temp to login on jenkins user 
+
+```
+root@ip-172-31-41-190 jenkins]# usermod -s /bin/bash jenkins 
+[root@ip-172-31-41-190 jenkins]# 
+[root@ip-172-31-41-190 jenkins]# 
+[root@ip-172-31-41-190 jenkins]# grep jenkins  /etc/passwd
+jenkins:x:995:993:Jenkins Automation Server:/var/lib/jenkins:/bin/bash
+[root@ip-172-31-41-190 jenkins]# 
+[root@ip-172-31-41-190 jenkins]# 
+[root@ip-172-31-41-190 jenkins]# su - jenkins 
+Last login: Fri Jun 23 09:54:57 IST 2023 on pts/2
+-bash-4.2$ 
+-bash-4.2$ 
+-bash-4.2$ ssh-keygen   
+Generating public/private rsa key pair.
+Enter file in which to save the key (//.ssh/id_rsa): 
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in .ssh/id_rsa.
+Your public key has been saved in /.ssh/id_rsa.pub.
+The key fingerprint is:
+SHA256:kYzjB8O+eYQj6Mv9anR7mNITcSRMkQrIWVOnScndfYM root@ip-172-31-12-245.ap-south-1.compute.internal
+The key's randomart image is:
+
+```
+
+### master system jenkins user will transfer key to slave machine user
+
+```
+-bash-4.2$ ssh-copy-id   ashu@172.31.12.245
+/usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/var/lib/jenkins/.ssh/id_rsa.pub"
+The authenticity of host '172.31.12.245 (172.31.12.245)' can't be established.
+ECDSA key fingerprint is SHA256:CNLrknQDPh7OWQP1dR5Ho5XbsbXtO83gKcFDLtjduuU.
+ECDSA key fingerprint is MD5:b4:db:61:1d:0d:b7:86:2b:bf:12:c2:39:98:fe:25:54.
+Are you sure you want to continue connecting (yes/no)? yes
+/usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
+/usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
+ashu@172.31.12.245's password: 
+
+Number of key(s) added: 1
+
+Now try logging into the machine, with:   "ssh 'ashu@172.31.12.245'"
+and check to make sure that only the key(s) you wanted were added.
+
+
+```
+
+### verify by login without password
+
+```
+bash-4.2$ whoami
+jenkins
+-bash-4.2$ 
+-bash-4.2$ 
+-bash-4.2$ ssh  ashu@172.31.12.245
+Last login: Fri Jun 23 04:22:17 2023
+
+       __|  __|_  )
+       _|  (     /   Amazon Linux 2 AMI
+      ___|\___|___|
+
+https://aws.amazon.com/amazon-linux-2/
+[ashu@ip-172-31-12-245 ~]$ 
+[ashu@ip-172-31-12-245 ~]$ whoami
+ashu
+[ashu@ip-172-31-12-245 ~]$ 
+
+```
+
+### remove shell access from jenkins user for security purpose 
+
+```
+[root@ip-172-31-41-190 jenkins]# usermod -s /bin/false  jenkins 
+[root@ip-172-31-41-190 jenkins]# 
+[root@ip-172-31-41-190 jenkins]# grep jenkins /etc/passwd
+jenkins:x:995:993:Jenkins Automation Server:/var/lib/jenkins:/bin/false
+[root@ip-172-31-41-190 jenkins]# 
+
+
+```
