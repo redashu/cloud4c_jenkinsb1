@@ -281,5 +281,39 @@ pipeline {
 
 ```
 
+### jenkinsfile with trigger options
+
+```
+pipeline {
+    agent any
+    triggers {
+        cron('H/2 * * * *')
+    }
+
+    stages {
+        stage('app building') {
+            steps {
+                echo 'Hello World , starting building process '
+            }
+        }
+        
+        stage('app testing..') {
+            steps {
+                echo "My app testing is going on"
+            }
+            
+        }
+        
+        stage(' app image or buiild is about to push')  {
+            steps {
+                echo "My docker image is getting pushed"
+            }
+        }
+            
+    }
+}
+
+```
+
 
 
