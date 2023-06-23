@@ -315,5 +315,48 @@ pipeline {
 
 ```
 
+### post action in jenkinsfile
 
+```
+pipeline {
+    agent any
+    triggers {
+        cron('H/2 * * * *')
+    }
+
+    stages {
+        stage('app building') {
+            steps {
+                echo 'Hello World , starting building process '
+            }
+        }
+        
+        stage('app testing..') {
+            steps {
+                echo "My app testing is going on"
+            }
+            
+        }
+        
+        stage(' app image or buiild is about to push')  {
+            steps {
+                echo "My docker image is getting pushed"
+            }
+        }
+            
+    }
+    post {
+        success {
+            echo 'Hey we did it without any failure !'
+        }
+        failure {
+            echo 'hey no worries we will try it again ..!' 
+        }
+        always {
+            echo 'keep up the Good work !'
+        }
+    }
+}
+
+```
 
