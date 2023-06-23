@@ -214,3 +214,32 @@ jenkins:x:995:993:Jenkins Automation Server:/var/lib/jenkins:/bin/false
 
 
 ```
+
+### Info purpose jenkins user have private key 
+
+```
+[root@ip-172-31-41-190 jenkins]# su - jenkins 
+Last login: Fri Jun 23 09:56:53 IST 2023 on pts/2
+-bash-4.2$ 
+-bash-4.2$ pwd
+/var/lib/jenkins
+-bash-4.2$ whoami
+jenkins
+-bash-4.2$ pwd
+/var/lib/jenkins
+-bash-4.2$ 
+-bash-4.2$ cd .ssh/
+-bash-4.2$ ls
+id_rsa  id_rsa.pub  known_hosts
+-bash-4.2$ cat id_rsa
+-----BEGIN RSA PRIVATE KEY-----
+MIIEpAIBAAKCAQEApDeA8/nzaMIi51l03MlO6YqwM3J0WqECeWD05q6gH3n+Bf5w
+A1FRbixl0QhZML9mY4NaSmpnb66azB25Piandz0QKZb9U0Xx49EFmRtMC5fiZZKT
+Sv6kW5HYWVFxjSrFDP53iMmgEyJcG0Zt9SFPzjqalDYdZFi42ITf2XUOdXlAx8MY
+T6ssk6csqKL/SHkluhtEuJ2dcSBgVR+LcT9UZhISM/wf4BQTi5rsDasqdc8LvivG
+fn6pqqzQhJMMz9Of9jHF5JU/J/+0CtwTVRWnuGbcH0vqdMGpB1Av2oZyKcRefRa0
+viyBIRXRmvw/KYyYxjjLrii10zhSfI1xAWbAIwIDAQABAoIBAAjnHW2csm6Of9ft
+CKHjpAyTQUQ4w0gajIjKEdzjwLiUI4ptpe
+```
+
+
