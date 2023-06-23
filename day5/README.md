@@ -269,12 +269,15 @@ pipeline {
             
         }
         
-        stage(' app image or buiild is about to push')
+        stage(' app image or buiild is about to push')  {
             steps {
                 echo "My docker image is getting pushed"
             }
+        }
+            
     }
 }
+
 
 ```
 
