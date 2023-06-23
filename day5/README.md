@@ -241,5 +241,42 @@ fn6pqqzQhJMMz9Of9jHF5JU/J/+0CtwTVRWnuGbcH0vqdMGpB1Av2oZyKcRefRa0
 viyBIRXRmvw/KYyYxjjLrii10zhSfI1xAWbAIwIDAQABAoIBAAjnHW2csm6Of9ft
 CKHjpAyTQUQ4w0gajIjKEdzjwLiUI4ptpe
 ```
+## Introduction to jenkinsfile
+
+<img src="jf.png">
+
+### introduction to the syntax of Jenkinsfile
+
+<img src="syntax.png">
+
+### sample jenkinsfile
+
+```
+pipeline {
+    agent any
+
+    stages {
+        stage('app building') {
+            steps {
+                echo 'Hello World , starting building process '
+            }
+        }
+        
+        stage('app testing..') {
+            steps {
+                echo "My app testing is going on"
+            }
+            
+        }
+        
+        stage(' app image or buiild is about to push')
+            steps {
+                echo "My docker image is getting pushed"
+            }
+    }
+}
+
+```
+
 
 
