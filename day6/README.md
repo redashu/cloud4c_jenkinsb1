@@ -108,3 +108,17 @@ pipeline {
 }
 
 ```
+
+### Java project builds
+
+<img src="java.png">
+
+### maven & jenkins
+
+<img src="maven.png">
+
+### jenkins plugins with free style vs pipeline 
+
+<img src="free.png">
+
+
