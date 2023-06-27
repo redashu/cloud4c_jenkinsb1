@@ -67,3 +67,43 @@ RUN mvn clean package
 
 ```
 
+### jenkinsfile new 
+
+```
+pipeline {
+    // choosing particular slave
+    agent {
+        label 'slave1'
+    }
+
+    stages {
+        stage('cloning java webapp from git repo') {
+            steps {
+                echo 'taking source code ..'
+                // using inbuild keyword git 
+                git 'https://github.com/redashu/java-springboot.git'
+                // verify 
+                sh 'ls'
+            }
+        }
+        stage('building this project on apache maven using Docker '){
+            steps {
+                echo 'Lets use apache maven to build java webapp to .war'
+                // building now
+                sh 'docker build -t ashuweb:java$BUILD_NUMBER .'
+                // verification 
+                sh 'docker images | grep -i ashuweb'
+            }
+        }
+    }
+    post {
+        success {
+            echo 'hey we have done it with maven also'
+        }
+        failure {
+            echo 'we need to figure out what happened'
+        }
+    }
+}
+
+```
