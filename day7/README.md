@@ -107,3 +107,50 @@ pipeline {
 }
 
 ```
+
+### using shell commands and using plugin in Jenkins jobs
+
+<img src="plugin1.png">
+
+### jenkisfile with docker pipeline plugin to build docker image
+
+```
+pipeline {
+    // choosing any jenkins instance
+    agent any 
+
+    stages {
+        stage('cloning java webapp from git repo') {
+            steps {
+                echo 'taking source code ..'
+                // using inbuild keyword git 
+                git 'https://github.com/redashu/java-springboot.git'
+                // verify 
+                sh 'ls'
+            }
+        }
+        stage('building this project on apache maven using Docker pipeline plugin'){
+            steps {
+                echo 'we are using docker pipeline plugins'
+                script {
+                    def imageName = "ashu-javaweb"
+                    def imageTag  =  "version$BUILD_NUMBER"
+                    
+                    docker.build(imageName + ":" + imageTag, "-f Dockerfile .")
+                }
+                // lets verify image 
+                sh 'docker images | grep -i ashu-javaweb'
+            }
+        }
+    }
+    post {
+        success {
+            echo 'hey we have done it with maven also'
+        }
+        failure {
+            echo 'we need to figure out what happened'
+        }
+    }
+}
+
+```
