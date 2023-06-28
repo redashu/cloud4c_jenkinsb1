@@ -102,10 +102,7 @@ pipeline {
             steps {
                 echo 'we are using trufflehog tool to detect'
                 sh 'docker run --rm  trufflesecurity/trufflehog:latest github --repo https://github.com/redashu/ashu-cisco-webUI.git --json  >keycheck.txt'
-                sh 'cat  keycheck.txt '
-                
-                
-                
+                sh 'cat  keycheck.txt' 
             }
         }
         // dockerpipeline to build docker image 
@@ -121,8 +118,6 @@ pipeline {
                 // verify image build
                 sh 'docker images | grep dockerashu'
             }
-        }
-            
         }
     }
 }
