@@ -92,3 +92,50 @@ pipeline {
 }
 
 ```
+
+## As best practice you should have a diff git repo for deployment 
+
+### creating namespace
+
+```
+apiVersion: v1
+kind: Namespace
+metadata:
+  creationTimestamp: null
+  name: ashu-final-app
+spec: {}
+status: {}
+```
+
+### deployment file 
+
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: ashu-appweb
+  name: ashu-appweb
+  namespace: ashu-final-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ashu-appweb
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: ashu-appweb
+    spec:
+      containers:
+      - image: dockerashu/ashuweb:sec-check16
+        name: ashuweb
+        ports:
+        - containerPort: 80
+        resources: {}
+status: {}
+
+```
