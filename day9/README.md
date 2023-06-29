@@ -79,7 +79,7 @@ pipeline {
         stage('creating deployment'){
             steps {
                 echo 'creating deployment using kubectl'
-                sh 'kubectl creat deployment ashu-webapp --image dockerashu/ashuweb:sec-check$BUILD_NUMBER --port 80 --namespace ashu-app'
+                sh 'kubectl create deployment ashu-webapp --image dockerashu/ashuweb:sec-check$BUILD_NUMBER --port 80 --namespace ashu-app'
                 // verify deployment 
                 sh 'kubectl -n ashu-app get deploy | grep ashu'
                 // verify pod status as well 
